@@ -3,6 +3,7 @@ const sequelize = require('./database');
 const User = require('./Model/User');
 const { status } = require('express/lib/response');
 const { SuccessResponse } = require('./Utils/response');
+require('dotenv').config();
 
 sequelize.sync().then(() => { console.log('db is ready'); });
 
@@ -17,6 +18,6 @@ app.use('/users', userRouter);
 app.use('/auth', authRouter);
 
 
-app.listen(3000, () => {
-    console.log('server running on port 3000');
+app.listen(process.env.PORT, () => {
+    console.log('server running on port 5000');
 });
