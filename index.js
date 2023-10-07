@@ -1,26 +1,21 @@
 const express = require('express');
 const sequelize = require('./database');
 const User = require('./Model/User');
+const { status } = require('express/lib/response');
+const { SuccessResponse } = require('./Utils/response');
 
 sequelize.sync().then(() => { console.log('db is ready'); });
 
 const app = express();
 
-app.post('/users', async (req, res) => {
-    User.create(req.body).then(() => {
-        res.send('user created');
-    }).catch(err => {
-        res.json(err);
-    });
-});
+app.use(express.json());
 
-app.get('/users', async (req, res) => {
-    User.findAll().then(() => {
-        res.send('TESTT');
-    }).catch(err => {
-        res.json(err);
-    });
-} );
+const userRouter = require('./Routes/user');
+const authRouter = require('./Routes/auth');
+
+app.use('/users', userRouter);
+app.use('/auth', authRouter);
+
 
 app.listen(3000, () => {
     console.log('server running on port 3000');
