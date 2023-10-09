@@ -1,8 +1,11 @@
+require('dotenv').config();
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: './dev.sqlite'
+const database = new Sequelize(process.env.POSTGRES_URL + "?sslmode=require", {
+  dialect: 'postgres',
 });
 
-module.exports = sequelize;
+module.exports = database;
+
+
+

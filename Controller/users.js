@@ -1,4 +1,4 @@
-const User = require('../Model/User');
+const User = require('../Model/Users');
 const { SuccessResponse, ErrorResponse } = require('../Utils/response');
 
 const RegisterUser = async (req, res) => {

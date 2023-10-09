@@ -1,10 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
 
-class User extends Model { }
+class Users extends Model { }
 
 const sequelize = require('../database');
 
-User.init({
+Users.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -76,9 +76,22 @@ User.init({
         type: DataTypes.STRING,
         allowNull: true
     },
+    created_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+    },
+    updated_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+    },
+    deleted_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+    }
 }, {
     sequelize,
-    modelName: 'user'
+    modelName: 'users',
+    underscored: true,
 });
 
-module.exports = User;
+module.exports = Users;
